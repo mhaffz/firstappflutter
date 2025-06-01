@@ -1,4 +1,4 @@
-name: todolist
+name: todo_list_app
 description: "A Todo List App"
 publish_to: 'none'
 version: 1.0.0+1
