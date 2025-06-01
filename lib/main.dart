@@ -40,6 +40,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void remove(int index) {
+    setState(() {
+      items.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,15 +66,23 @@ class _HomePageState extends State<HomePage> {
         itemCount: items.length,
         itemBuilder: (BuildContext ctxt, int index) {
           final item = items[index];
-          return CheckboxListTile(
-            title: Text(item.title),
+          return Dismissible(
             key: Key(item.title),
-            value: item.done,
-            onChanged: (value) {
-              setState(() {
-                item.done = value ?? false;
-              });
+            background: Container(
+              color: const Color.fromRGBO(244, 67, 54, 0.2),
+            ),
+            onDismissed: (direction) {
+              remove(index);
             },
+            child: CheckboxListTile(
+              title: Text(item.title),
+              value: item.done,
+              onChanged: (value) {
+                setState(() {
+                  item.done = value ?? false;
+                });
+              },
+            ),
           );
         },
       ),
